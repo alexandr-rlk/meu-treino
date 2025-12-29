@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Gym Progress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="tela-usuarios" class="tela">
+        <h1>Quem vai treinar?</h1>
+        <div class="grid-usuarios">
+            <div class="card-usuario" onclick="selecionarUsuario('Alexandre')">
+                <div class="avatar">A</div>
+                <span>Alexandre</span>
+            </div>
+            <div class="card-usuario" onclick="alert('Funcionalidade em breve!')">
+                <div class="avatar novo">+</div>
+                <span>Adicionar</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="tela-divisao" class="tela hidden">
+        <header>
+            <button onclick="voltarParaUsuarios()">← Voltar</button>
+            <h1 id="nome-logado">Treinos</h1>
+        </header>
+        <div id="lista-treinos">
+            </div>
+    </section>
+
+    <section id="tela-treino-ativo" class="tela hidden">
+        <header>
+            <button onclick="voltarParaDivisao()">✕ Cancelar</button>
+            <h2 id="titulo-treino-atual">Treino 1</h2>
+            <button id="btn-finalizar" onclick="finalizarTreino()">Concluir</button>
+        </header>
+        <div id="exercicios-lista">
+            </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
