@@ -1,15 +1,20 @@
-// Dados iniciais (Exemplo do Treino 1)
+// ESTRUTURA DOS SEUS 6 TREINOS
 const treinosCadastrados = {
-    1: { nome: "Bíceps | Tríceps", exercicios: [
-        { nome: "Rosca Direta", foto: "https://via.placeholder.com/150", sets: 3, descanso: "60s" },
-        { nome: "Tríceps Pulley", foto: "https://via.placeholder.com/150", sets: 4, descanso: "45s" }
-    ]},
-    2: { nome: "Costas | Trapézio", exercicios: [] },
-    // Adicione os outros treinos (3, 4, 5, 6) aqui seguindo o mesmo padrão
+    1: { 
+        nome: "Treino 1 - Bíceps | Tríceps", 
+        exercicios: [
+            { nome: "Rosca Direta", foto: "assets/rosca.jpg", sets: 3, descanso: "60s" },
+            { nome: "Tríceps Pulley", foto: "assets/triceps.jpg", sets: 3, descanso: "60s" }
+        ]
+    },
+    2: { nome: "Treino 2 - Peito | Ombro", exercicios: [] },
+    3: { nome: "Treino 3 - Costas | Trapézio", exercicios: [] },
+    4: { nome: "Treino 4 - Pernas", exercicios: [] },
+    5: { nome: "Treino 5 - Abdômen | Cardio", exercicios: [] },
+    6: { nome: "Treino 6 - Full Body", exercicios: [] }
 };
 
 let usuarioAtual = "";
-let treinoEmAndamento = [];
 
 function selecionarUsuario(nome) {
     usuarioAtual = nome;
@@ -23,11 +28,11 @@ function renderizarMenuTreinos() {
     const lista = document.getElementById('lista-treinos');
     lista.innerHTML = "";
     for (let i = 1; i <= 6; i++) {
-        const info = treinosCadastrados[i] || { nome: "Vazio" };
+        const info = treinosCadastrados[i];
         lista.innerHTML += `
             <div class="item-treino" onclick="iniciarTreino(${i})">
                 <span><strong>Treino ${i}</strong> - ${info.nome}</span>
-                <span>➔</span>
+                <span style="color: var(--blue)">➔</span>
             </div>
         `;
     }
@@ -51,11 +56,10 @@ function iniciarTreino(id) {
                 </div>
             `;
         }
-
         lista.innerHTML += `
             <div class="card-exercicio">
-                <img src="${ex.foto}" class="img-exercicio">
-                <h3>${ex.nome} <small style="color:gray">(${ex.descanso})</small></h3>
+                <img src="${ex.foto}" class="img-exercicio" onerror="this.src='https://via.placeholder.com/300x180?text=Sem+Foto'">
+                <h3>${ex.nome} <small style="color:#0a84ff; font-size: 0.8rem;">⏱ ${ex.descanso}</small></h3>
                 ${seriesHTML}
             </div>
         `;
@@ -72,20 +76,17 @@ function marcarSerie(exId, sId) {
 }
 
 function finalizarTreino() {
-    const confirmacao = confirm("Deseja finalizar e salvar o treino?");
-    if (confirmacao) {
-        const resumo = {
+    if(confirm("Concluir treino e salvar no histórico?")) {
+        const log = {
             usuario: usuarioAtual,
-            data: new Date().toISOString(),
-            treino: document.getElementById('titulo-treino-atual').innerText
+            treino: document.getElementById('titulo-treino-atual').innerText,
+            data: new Date().toLocaleString()
         };
+        let historico = JSON.parse(localStorage.getItem('historico_gym') || "[]");
+        historico.push(log);
+        localStorage.setItem('historico_gym', JSON.stringify(historico));
         
-        // Salva no Banco de Dados do Navegador (LocalStorage)
-        let historico = JSON.parse(localStorage.getItem('historico_treinos') || "[]");
-        historico.push(resumo);
-        localStorage.setItem('historico_treinos', JSON.stringify(historico));
-
-        alert("Treino salvo com sucesso! No final do ano faremos sua retrospectiva.");
+        alert("Treino Concluído! Parabéns.");
         voltarParaDivisao();
     }
 }
