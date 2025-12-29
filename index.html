@@ -4,46 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Gym Progress</title>
+    <title>Gym Aesthetics</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <section id="tela-usuarios" class="tela">
-        <h1>Quem vai treinar?</h1>
-        <div class="grid-usuarios">
-            <div class="card-usuario" onclick="selecionarUsuario('Alexandre')">
-                <div class="avatar">
-                    <img src="assets/alexandre.jpg" alt="Alexandre" class="foto-perfil">
+        <div class="card-usuario" onclick="selecionarUsuario('Alexandre')">
+            <div class="avatar-grande">
+                <img src="assets/alexandre.jpg" alt="Alexandre">
+            </div>
+            <h2>Alexandre</h2>
+        </div>
+    </section>
+
+    <section id="tela-dashboard" class="tela hidden">
+        <header class="header-premium">
+            <div class="perfil-topo">
+                <img src="assets/alexandre.jpg" class="foto-mini">
+                <div>
+                    <span class="saudacao">Olá,</span>
+                    <h3 class="nome-usuario">Alexandre</h3>
                 </div>
-                <span>Alexandre</span>
             </div>
-            <div class="card-usuario" onclick="alert('Funcionalidade em breve!')">
-                <div class="avatar novo"><span>+</span></div>
-                <span>Adicionar</span>
+            <i class="fas fa-cog icon-config"></i>
+        </header>
+
+        <div class="card-destaque">
+            <div class="badge-status" id="status-tag">Treino de hoje</div>
+            <h2 id="proximo-treino-nome">Ficha A</h2>
+            <div class="dias-semana">
+                <span>S</span><span class="active">T</span><span>Q</span><span>Q</span><span>S</span><span>S</span><span>D</span>
             </div>
+            <button class="btn-acao-principal" id="btn-main-action" onclick="abrirDivisao()">Iniciar Treino</button>
         </div>
     </section>
 
     <section id="tela-divisao" class="tela hidden">
-        <header class="app-bar">
-            <button class="btn-back" onclick="voltarParaUsuarios()">←</button>
-            <h1 id="nome-logado">Treinos</h1>
+        <header class="header-premium">
+            <button onclick="voltarDash()" class="btn-icon"><i class="fas fa-chevron-left"></i></button>
+            <h3>Minhas Fichas</h3>
         </header>
-        <div id="lista-treinos" class="menu-lista">
-            </div>
+        <div id="lista-treinos" class="grid-fichas"></div>
     </section>
 
-    <section id="tela-treino-ativo" class="tela hidden">
-        <header class="app-bar">
-            <button class="btn-cancel" onclick="voltarParaDivisao()">✕</button>
-            <h2 id="titulo-treino-atual">Treino</h2>
-            <button id="btn-finalizar" onclick="finalizarTreino()">Concluir</button>
-        </header>
-        <div id="exercicios-lista">
+    <div id="mini-player" class="mini-player hidden">
+        <div class="player-info">
+            <h4 id="player-ex-nome">Supino Reto</h4>
+            <div class="player-stats">
+                <span><i class="fas fa-redo"></i> 8 a 12</span>
+                <span><i class="fas fa-weight-hanging"></i> <span id="player-carga">0</span>kg</span>
             </div>
-    </section>
+        </div>
+        <div class="player-controls">
+            <button><i class="fas fa-backward-step"></i></button>
+            <button class="btn-check-main"><i class="fas fa-check"></i></button>
+            <button><i class="fas fa-forward-step"></i></button>
+        </div>
+    </div>
+
+    <nav class="tab-bar hidden" id="main-nav">
+        <div class="tab-item active" onclick="voltarDash()">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </div>
+        <div class="tab-item" onclick="abrirDivisao()">
+            <i class="fas fa-dumbbell"></i>
+            <span>Treino</span>
+        </div>
+    </nav>
 
     <script src="script.js"></script>
 </body>
