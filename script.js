@@ -1,132 +1,102 @@
-// ESTRUTURA DOS SEUS 6 TREINOS
-const treinosCadastrados = {
-    1: { 
-        nome: "Bíceps | Tríceps", 
-        exercicios: [
-            { nome: "Rosca Direta", foto: "assets/rosca.jpg", sets: 3, descanso: "60s" },
-            { nome: "Tríceps Pulley", foto: "assets/triceps.jpg", sets: 3, descanso: "60s" }
-        ]
-    },
-    2: { 
-        nome: "Quadríceps | Panturrilha | Lombar", 
-        exercicios: [
-            { nome: "Agachamento", foto: "assets/agachamento.jpg", sets: 4, descanso: "90s" },
-            { nome: "Panturrilha em pé", foto: "assets/panturrilha.jpg", sets: 4, descanso: "45s" }
-        ]
-    },
-    3: { 
-        nome: "Peito | Ombro", 
-        exercicios: [
-            { nome: "Supino Reto", foto: "assets/supino.jpg", sets: 4, descanso: "60s" },
-            { nome: "Desenvolvimento Ombro", foto: "assets/desenvolvimento.jpg", sets: 3, descanso: "60s" }
-        ]
-    },
-    4: { 
-        nome: "Costas | Trapézio", 
-        exercicios: [
-            { nome: "Puxada Pulley", foto: "assets/puxada.jpg", sets: 4, descanso: "60s" },
-            { nome: "Encolhimento", foto: "assets/encolhimento.jpg", sets: 4, descanso: "45s" }
-        ]
-    },
-    5: { 
-        nome: "Posterior | Panturrilha | Lombar", 
-        exercicios: [
-            { nome: "Stiff", foto: "assets/stiff.jpg", sets: 4, descanso: "60s" },
-            { nome: "Cadeira Flexora", foto: "assets/flexora.jpg", sets: 3, descanso: "60s" }
-        ]
-    },
-    6: { 
-        nome: "Bíceps | Tríceps", 
-        exercicios: [
-            { nome: "Rosca Martelo", foto: "assets/martelo.jpg", sets: 3, descanso: "60s" },
-            { nome: "Tríceps Testa", foto: "assets/testa.jpg", sets: 3, descanso: "60s" }
-        ]
-    }
-};
-
-let usuarioAtual = "";
-
-function selecionarUsuario(nome) {
-    usuarioAtual = nome;
-    document.getElementById('nome-logado').innerText = `Treinos de ${nome}`;
-    document.getElementById('tela-usuarios').classList.add('hidden');
-    document.getElementById('tela-divisao').classList.remove('hidden');
-    renderizarMenuTreinos();
+:root {
+    --preto: #000000;
+    --cinza-card: #1c1c1e;
+    --azul: #0a84ff;
+    --texto-secundario: #8e8e93;
 }
 
-function renderizarMenuTreinos() {
-    const lista = document.getElementById('lista-treinos');
-    lista.innerHTML = "";
-    for (let i = 1; i <= 6; i++) {
-        const info = treinosCadastrados[i];
-        lista.innerHTML += `
-            <div class="item-treino" onclick="iniciarTreino(${i})">
-                <span><strong>Treino ${i}</strong> - ${info.nome}</span>
-                <span style="color: var(--blue)">➔</span>
-            </div>
-        `;
-    }
+body {
+    background-color: var(--preto);
+    color: white;
+    font-family: -apple-system, system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
-function iniciarTreino(id) {
-    const treino = treinosCadastrados[id];
-    document.getElementById('titulo-treino-atual').innerText = treino.nome;
-    const lista = document.getElementById('exercicios-lista');
-    lista.innerHTML = "";
+.hidden { display: none !important; }
 
-    treino.exercicios.forEach((ex, indexEx) => {
-        let seriesHTML = "";
-        for (let s = 1; s <= ex.sets; s++) {
-            seriesHTML += `
-                <div class="linha-serie" id="serie-${indexEx}-${s}">
-                    <span>${s}</span>
-                    <input type="number" placeholder="Kg">
-                    <input type="number" placeholder="Reps">
-                    <button class="btn-check" onclick="marcarSerie(${indexEx}, ${s})">✓</button>
-                </div>
-            `;
-        }
-        lista.innerHTML += `
-            <div class="card-exercicio">
-                <img src="${ex.foto}" class="img-exercicio" onerror="this.src='https://via.placeholder.com/300x180?text=Sem+Foto'">
-                <h3>${ex.nome} <small style="color:#0a84ff; font-size: 0.8rem;">⏱ ${ex.descanso}</small></h3>
-                ${seriesHTML}
-            </div>
-        `;
-    });
-
-    document.getElementById('tela-divisao').classList.add('hidden');
-    document.getElementById('tela-treino-ativo').classList.remove('hidden');
+/* Tela de Seleção */
+.tela-cheia {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-function marcarSerie(exId, sId) {
-    const linha = document.getElementById(`serie-${exId}-${sId}`);
-    linha.classList.toggle('concluida');
-    linha.querySelector('.btn-check').classList.toggle('active');
+.card-login { text-align: center; cursor: pointer; }
+.avatar-perfil {
+    width: 120px; height: 120px; border-radius: 50%;
+    border: 3px solid var(--azul); overflow: hidden; margin-bottom: 15px;
+}
+.avatar-perfil img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Header Premium */
+.header-app {
+    padding: 50px 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.user-info { display: flex; align-items: center; gap: 12px; }
+.foto-thumb { width: 45px; height: 45px; border-radius: 50%; border: 1.5px solid var(--azul); }
+.label { color: var(--texto-secundario); font-size: 0.8rem; }
+.username { margin: 0; font-size: 1.1rem; }
+.btn-config { background: none; border: none; color: white; font-size: 1.2rem; }
+
+/* Banner Treino */
+.banner-treino {
+    background-color: var(--cinza-card);
+    margin: 20px;
+    padding: 25px;
+    border-radius: 25px;
+}
+.status-badge {
+    background: rgba(10, 132, 255, 0.2);
+    color: var(--azul);
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.prof-name { color: var(--texto-secundario); margin: 5px 0; }
+.semana-tracker { display: flex; gap: 8px; margin: 20px 0; }
+.semana-tracker span {
+    width: 28px; height: 28px; background: #333; 
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;
+}
+.semana-tracker span.active { background: var(--azul); }
+
+.btn-principal {
+    width: 100%; background: var(--azul); border: none; color: white;
+    padding: 15px; border-radius: 15px; font-weight: bold; font-size: 1rem;
 }
 
-function finalizarTreino() {
-    if(confirm("Concluir treino e salvar no histórico?")) {
-        const log = {
-            usuario: usuarioAtual,
-            treino: document.getElementById('titulo-treino-atual').innerText,
-            data: new Date().toLocaleString()
-        };
-        let historico = JSON.parse(localStorage.getItem('historico_gym') || "[]");
-        historico.push(log);
-        localStorage.setItem('historico_gym', JSON.stringify(historico));
-        
-        alert("Treino Concluído! Parabéns.");
-        voltarParaDivisao();
-    }
+/* Mini Player */
+.mini-player {
+    position: fixed; bottom: 90px; left: 15px; right: 15px;
+    background: #2c2c2e; padding: 15px; border-radius: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+.ex-nome { font-weight: bold; font-size: 0.9rem; }
+.ex-info { font-size: 0.75rem; color: var(--texto-secundario); margin-top: 4px; display: flex; gap: 10px;}
+.player-actions { display: flex; align-items: center; gap: 15px; }
+.btn-step { background: none; border: none; color: white; font-size: 1.1rem; }
+.btn-play-check {
+    background: var(--azul); border: none; width: 42px; height: 42px;
+    border-radius: 50%; color: white;
 }
 
-function voltarParaDivisao() {
-    document.getElementById('tela-treino-ativo').classList.add('hidden');
-    document.getElementById('tela-divisao').classList.remove('hidden');
+/* Tab Bar */
+.tab-bar {
+    position: fixed; bottom: 0; width: 100%;
+    background: #111; display: flex; padding: 10px 0 30px;
+    border-top: 0.5px solid #333;
 }
-
-function voltarParaUsuarios() {
-    document.getElementById('tela-divisao').classList.add('hidden');
-    document.getElementById('tela-usuarios').classList.remove('hidden');
-}
+.tab-item { flex: 1; text-align: center; color: var(--texto-secundario); }
+.tab-item.active { color: var(--azul); }
+.tab-item i { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+.tab-item span { font-size: 0.65rem; }
