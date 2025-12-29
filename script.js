@@ -36,7 +36,7 @@ const treinosCadastrados = {
         ]
     },
     6: { 
-        nome: "Bíceps | Tríceps (Repetição)", 
+        nome: "Bíceps | Tríceps", 
         exercicios: [
             { nome: "Rosca Martelo", foto: "assets/martelo.jpg", sets: 3, descanso: "60s" },
             { nome: "Tríceps Testa", foto: "assets/testa.jpg", sets: 3, descanso: "60s" }
