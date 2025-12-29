@@ -1,17 +1,47 @@
 // ESTRUTURA DOS SEUS 6 TREINOS
 const treinosCadastrados = {
     1: { 
-        nome: "Treino 1 - Bíceps | Tríceps", 
+        nome: "Bíceps | Tríceps", 
         exercicios: [
             { nome: "Rosca Direta", foto: "assets/rosca.jpg", sets: 3, descanso: "60s" },
             { nome: "Tríceps Pulley", foto: "assets/triceps.jpg", sets: 3, descanso: "60s" }
         ]
     },
-    2: { nome: "Treino 2 - Peito | Ombro", exercicios: [] },
-    3: { nome: "Treino 3 - Costas | Trapézio", exercicios: [] },
-    4: { nome: "Treino 4 - Pernas", exercicios: [] },
-    5: { nome: "Treino 5 - Abdômen | Cardio", exercicios: [] },
-    6: { nome: "Treino 6 - Full Body", exercicios: [] }
+    2: { 
+        nome: "Quadríceps | Panturrilha | Lombar", 
+        exercicios: [
+            { nome: "Agachamento", foto: "assets/agachamento.jpg", sets: 4, descanso: "90s" },
+            { nome: "Panturrilha em pé", foto: "assets/panturrilha.jpg", sets: 4, descanso: "45s" }
+        ]
+    },
+    3: { 
+        nome: "Peito | Ombro", 
+        exercicios: [
+            { nome: "Supino Reto", foto: "assets/supino.jpg", sets: 4, descanso: "60s" },
+            { nome: "Desenvolvimento Ombro", foto: "assets/desenvolvimento.jpg", sets: 3, descanso: "60s" }
+        ]
+    },
+    4: { 
+        nome: "Costas | Trapézio", 
+        exercicios: [
+            { nome: "Puxada Pulley", foto: "assets/puxada.jpg", sets: 4, descanso: "60s" },
+            { nome: "Encolhimento", foto: "assets/encolhimento.jpg", sets: 4, descanso: "45s" }
+        ]
+    },
+    5: { 
+        nome: "Posterior | Panturrilha | Lombar", 
+        exercicios: [
+            { nome: "Stiff", foto: "assets/stiff.jpg", sets: 4, descanso: "60s" },
+            { nome: "Cadeira Flexora", foto: "assets/flexora.jpg", sets: 3, descanso: "60s" }
+        ]
+    },
+    6: { 
+        nome: "Bíceps | Tríceps (Repetição)", 
+        exercicios: [
+            { nome: "Rosca Martelo", foto: "assets/martelo.jpg", sets: 3, descanso: "60s" },
+            { nome: "Tríceps Testa", foto: "assets/testa.jpg", sets: 3, descanso: "60s" }
+        ]
+    }
 };
 
 let usuarioAtual = "";
